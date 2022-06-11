@@ -85,6 +85,7 @@
 			</div>
 		</div>
 	</div>
+    <a href="logout.php"> LOGOUT </a>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
 </html>

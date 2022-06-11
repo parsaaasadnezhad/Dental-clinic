@@ -1,3 +1,15 @@
+<?php
+  session_start();
+  // if user has login before, go to schedule.php
+  if (isset($_SESSION['hasLogin']) && $_SESSION['hasLogin'] === true) {
+    ?>
+        <script type="text/javascript">
+            location.replace("schedule.php")
+        </script>
+    <?php
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

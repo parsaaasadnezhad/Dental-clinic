@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    
     if (isset($_POST['username']) && isset($_POST['password']) 
         && !empty($_POST['username']) && !empty($_POST['password']))
     {
@@ -23,19 +25,21 @@
     $sql = "SELECT * FROM dentist.users WHERE username='$username' and password='$password'";
 
     $result = mysqli_query($conn, $sql);
-    // var_dump($result);
-    if ($result == true) {
-        $row = mysqli_num_rows($result);
-        if ($row == 1) {
-            ?>
-                <script text="text/javascript">
-                    location.replace('index.php')
-                </script>
-            <?php
-        } else {
-            echo "Sorry, no user founded ;(";
-        }
-        mysqli_free_result($result);
-    } 
+    $row = mysqli_fetch_array($result);
+
+    if ($row) {
+        // in here we are sure that some one has login successfully
+        $_SESSION['hasLogin'] = true;
+        $_SESSION['username'] = $username;
+        $_SESSION['userType'] = $row['isDoctor'];
+        ?>
+            <script text="text/javascript">
+                location.replace('schedule.php')
+            </script>
+        <?php
+    } else {
+        echo "Sorry, no user founded ;(";
+    }
+    mysqli_free_result($result);  
     mysqli_close($conn);
 ?>
